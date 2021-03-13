@@ -1,0 +1,80 @@
+<hr/>
+<div class="row">
+
+    <div class="col-lg-6" id="coll">
+    
+        <div style="float: right">Hello, {{userName}}
+            <a href="javascript:void(0)" (click)="logout()">Logout</a>
+        
+        
+        </div>
+
+        <header class="model-header"><h2>Displaying Videos:-</h2></header>
+      <br/>
+        <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+     <tr>
+         <th>Action</th>
+         <th>Title</th>
+          <th>Description</th>
+          <th>url</th>
+     </tr>
+     <tr *ngFor="let video of videos">
+         <td><input type="radio" name="r1" (change)="onSelect(video,b1)"></td>
+         <td>{{video.title}}</td>
+         <td>{{video.description}}</td>
+         <td><a [href]="video.url" target="_blank">{{video.url}}</a></td>
+    
+     </tr>
+     </table>
+    </div>
+    </div>
+<div class="col-lg-6">
+    <header class="model-header"><h2> Video Details:-</h2></header>
+    <form #videoData="ngForm">
+        <div class="form-group">
+           <iframe framborder="0" width="100%" height="250px" [src]="selectedVideo.url | safe" *ngIf="selectedVideo.url"></iframe>
+
+        </div>
+        <div class="form-group">
+            <label>Title:-</label>
+            <input type="text" #title="ngModel" name="title" class="form-control"[ngModel]="selectedVideo.title" required [class.is-invalid]="title.invalid && title.touched" >
+          <!--Error Visual Effects-->
+          <div *ngIf="title.errors && (title.invalid && title.touched)">
+            <small class="text-danger" *ngIf="title.errors.required">Title is Required.</small>
+        </div>
+        </div>
+         
+
+        <div class="form-group">
+            <label>Description:-</label>
+            <textarea name="description" #desc="ngModel" cols="30" rows="10" class="form-control" [ngModel]="selectedVideo.description" required [class.is-invalid]="desc.invalid && desc.touched"></textarea>
+            <!---Error Visual Effects-->
+            <div *ngIf="desc.errors && (desc.invalid && desc.touched)">
+            <small class="text-danger " *ngIf="desc.errors.required">Please Provide Description for this Video.</small>
+            
+        </div>
+        </div>
+         
+       <div class="form-group">
+           <label>Url:-</label>
+           <input type="text" #url="ngModel" name="url" class="form-control " [ngModel]="selectedVideo.url" required [class.is-invalid]="url.invalid && url.touched"  pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)">
+<!--Error Effects-->
+<div *ngIf="url.errors && (url.invalid && url.touched)">
+    <small class="text-danger" *ngIf="url.errors.required" > Url is required</small>
+  <small class="text-danger " *ngIf="url.errors.pattern">Invalid Url</small>
+</div>
+</div> 
+
+<div class="form-group">
+    <button type="button" #b1 [disabled]="videoData.form.invalid" (click)="saveVideo(videoData,b1)" class="btn btn-sm btn-primary" [class.btn-warning]="btn=='Update'" >Add</button>
+&nbsp;&nbsp;
+<!--Adding a delete button-->
+<button class="btn btn-sm btn-danger" (click)="removeVideo(selectedVideo._id)" type="button" *ngIf="selectedVideo.title">Delete</button>
+
+</div>
+   </form>
+   <div *ngIf="message" class="alert alert-success">
+       {{message}} </div>
+</div>
+</div>

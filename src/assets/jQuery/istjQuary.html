@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+<style type="text/css">
+	.wrapper{
+background: linear-gradient(red,yellow);
+padding: 12px 15px;
+width: 30%;
+border: 5px solid blue;
+box-shadow: 10px 10px 10px black;
+color: white;		
+	}
+
+
+
+
+
+</style>
+
+
+	<script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+ console.log("jQuary is loaded");
+  $('#b1').click(function(){
+   console.log("button Clicked");
+  //$('.Para1').hide(1000);
+  $('.Para1').toggle(1000);
+   //$('.Para1').show(1000);   
+      
+
+
+     });
+$('#add').click(function(){
+console.log("Adding Css");
+$('.Para1').addClass("wrapper");
+});
+$('#rem').click(function(){
+	console.log("Removingng Css");
+	$('.Para1').removeClass("wrapper");
+});
+$('#tog').click(function(){
+console.log("Toggling Css");
+$('.Para1').toggleClass("wrapper");
+});
+
+
+
+		});
+
+
+
+
+
+
+	</script>
+</head>
+<body>
+	<h1>jQuary First Example....</h1>
+<p class="Para1">Hi,I am Subhadip Bor</p>
+<p class="Para1">Address :- Howrah,WestBengal,711411</p>
+<p class="Para1">Mobile No:- 9088195066</p>
+<p class="Para1">Email id :- amisubhadip970407@gmail.com</p>
+<button id="b1">Show/Hide</button>
+<button id="add">Add Css</button>
+<button id="rem">Remove Css</button>
+<button id="tog">Toggle Css</button>
+
+</body>
+</html>
